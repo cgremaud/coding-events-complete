@@ -69,15 +69,14 @@ public class AuthenticationController {
         String password = registerFormDTO.getPassword();
         String verifyPassword = registerFormDTO.getVerifyPassword();
         if (!password.equals(verifyPassword)) {
-            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match");
+            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match"); //so why don't you need to add the errors to the model object?
             model.addAttribute("title", "Register");
             return "register";
         }
 
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword()); //this calls the constructor which saves only the hash from the string passed in.
         userRepository.save(newUser);
-        setUserInSession(request.getSession(), newUser); //so request is an obj representing the actual HTTP request, and it includes a session,
-        //we then call our method setUserInSession and pass it a session and our newUser object. so they're logged in?
+        setUserInSession(request.getSession(), newUser); //so this creates a session despite never explicitly creating a new Session obj?
 
         return "redirect:";
     }

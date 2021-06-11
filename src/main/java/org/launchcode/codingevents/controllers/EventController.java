@@ -114,6 +114,9 @@ public class EventController {
     public String displayAddTagForm(@RequestParam Integer eventId, Model model) {
 
         Optional<Event> result = eventRepository.findById(eventId);
+        if (result.isEmpty()) {
+            return "redirect:";
+        }
         Event event = result.get();
         model.addAttribute("title", "Add tag to " + event.getName());
         model.addAttribute("tags", tagRepository.findAll());

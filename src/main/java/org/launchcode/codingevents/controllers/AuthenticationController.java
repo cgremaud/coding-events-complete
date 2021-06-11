@@ -74,9 +74,10 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword()); //this calls the constructor which saves only the hash from the string passed in.
         userRepository.save(newUser);
-        setUserInSession(request.getSession(), newUser);
+        setUserInSession(request.getSession(), newUser); //so request is an obj representing the actual HTTP request, and it includes a session,
+        //we then call our method setUserInSession and pass it a session and our newUser object. so they're logged in?
 
         return "redirect:";
     }

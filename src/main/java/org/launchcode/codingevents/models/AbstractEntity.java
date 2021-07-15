@@ -11,13 +11,13 @@ import java.util.Objects;
 @MappedSuperclass
 public abstract class AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private int id;
+        @Id
+        @GeneratedValue
+        private int id;
 
-    public int getId() {
-        return id;
-    }
+        public int getId() {
+            return id;
+        }
 
     @Override
     public boolean equals(Object o) {
